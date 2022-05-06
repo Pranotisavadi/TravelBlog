@@ -1,8 +1,10 @@
 import "./navbar.css";
 import { BsLinkedin, BsGithub, BsSearch } from "react-icons/bs";
 import Search from "../images/search.JPG";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
+  const user = false;
   return (
     <div className="navbar">
       <div className="navLeft">
@@ -20,15 +22,27 @@ const NavBar = () => {
 
       <div className="navCenter">
         <ul className="navList">
-          <li className="navListItem">HOME</li>
-          <li className="navListItem">ABOUT</li>
-          <li className="navListItem">CONTACT</li>
-          <li className="navListItem">WRITE</li>
-          <li className="navListItem">LOGOUT</li>
+          <li className="navListItem">
+            <Link className="link" to="/">HOME</Link>
+          </li>
+          <li className="navListItem"><Link className="link" to="/">ABOUT</Link></li>
+          <li className="navListItem"><Link className="link" to="/">CONTACT</Link></li>
+          <li className="navListItem"><Link className="link" to="/">WRITE</Link></li>
+          <li className="navListItem">{user && "LOGOUT"}</li>
         </ul>
       </div>
       <div className="navRight">
-        <img className="navImg" src={Search} alt="Search Bar"></img><BsSearch className="searchIcon" />
+        {
+          user ? ( 
+          <img className="navImg" src={Search} alt="Search Bar"></img>
+          ) :(
+            <ul className="navList">
+              <li className="navListItem"> <Link className="link" to="/login">LOGIN</Link></li>
+              <li className="navListItem"> <Link className="link" to="/register">REGISTER</Link></li>
+            </ul>
+          )
+        }
+       <BsSearch className="searchIcon" />
       </div>
     </div>
   );
