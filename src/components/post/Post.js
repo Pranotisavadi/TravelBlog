@@ -1,27 +1,28 @@
+import { Link } from 'react-router-dom';
 import './post.css'
-import Post1 from "../images/post.JPG";
+// import Post1 from "../images/post.JPG";
 
-const Post = () => {
+const Post = ({post}) => {
     return ( 
         <div className="post">
-           <img className="postImg" src={ Post1 } alt="Me"></img>
+            {post.photo && (
+                <img className="postImg" src={ post.photo } alt="Post"></img>
+            )}
            <div className="postInfo">
-               <div>
-                   <span className="postType">Hiking</span>
-                   <span className="postType">Cruise</span>
-                   
-               </div>
-               <span className="postTitle">Lorem ipsum dolor</span>
+               {/* <div className="postTypes" key={post.id}>{
+                   post.catogories.map((c) => (
+                       <span className="postType">{c.name}</span>
+                   ))
+               }               
+               </div> */}
+               <Link  to={`/post/${post._id}`} className="link"><span className="postTitle">{post.title}</span>
+               </Link>
+               
                <hr/>
-               <span className="postDate">1 hour ago</span>               
+               <span className="postDate">{(post.createdAt)}</span>               
             </div>
             <p className="postDesc">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aspernatur alias, at nihil voluptate adipisci eum saepe ut sequi beatae rerum doloribus consequatur assumenda dolorum id repudiandae quo iste ratione dolorem.
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aspernatur alias, at nihil voluptate adipisci eum saepe ut sequi beatae rerum doloribus consequatur assumenda dolorum id repudiandae quo iste ratione dolorem.
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aspernatur alias, at nihil voluptate adipisci eum saepe ut sequi beatae rerum doloribus consequatur assumenda dolorum id repudiandae quo iste ratione dolorem.
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aspernatur alias, at nihil voluptate adipisci eum saepe ut sequi beatae rerum doloribus consequatur assumenda dolorum id repudiandae quo iste ratione dolorem.
-
-
+                {post.description}
             </p>
         </div>
 

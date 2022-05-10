@@ -1,8 +1,21 @@
 import './sidebar.css'
 import Me from "../images/me.jpg";
 import { BsLinkedin, BsGithub } from "react-icons/bs";
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const SideBar = () => {
+    const [caty, setCaty] = useState([])
+
+    useEffect(() => {
+        const getCaty = async () => {
+            const res = await axios.get("/types");
+            setCaty(res.data)
+        };
+        getCaty();
+
+    },[])
     return ( 
         <div className="sidebar">
             <div className="sidebarItem">
@@ -14,10 +27,14 @@ const SideBar = () => {
             <div className="sidebarItem">
                 <span className="sidebarTitle">CATEGORIES</span>
                     <ul className="sidebarList">
-                        <li className="sidebarListItem">Hiking</li>
-                        <li className="sidebarListItem">Travel</li>
-                        <li className="sidebarListItem">Beaches</li>
-                        <li className="sidebarListItem">Cruise</li>
+                        {caty.map((c) => (
+                            <Link to={`/?caty=${c.name}`} className="link">
+                                   <li className="sidebarListItem" key={caty.id}>{c.name}</li>
+                            </Link>
+                         
+
+                        ))}
+                        
                     </ul>
             </div>
             <div className="sidebarItem">

@@ -1,27 +1,45 @@
 import './singlepost.css';
-import singlepost from "../images/singlepost.jpg";
+// import singlepost from "../images/singlepost.jpg";
 import { FaRegEdit } from "react-icons/fa";
 import { MdOutlineDeleteSweep } from "react-icons/md";
+import { useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const SinglePost = () => {
+const location = useLocation();
+const path= location.pathname.split("/")[2];
+const [post, setPost] = useState({});
+
+useEffect(() => {
+    const getPost = async ()=> {
+        const res =await  axios.get("/posts/" + path);
+        setPost(res.data)
+            }
+            getPost();
+    },[path])
+
+
     return ( 
         <div className="singlepost">
             <div className="singlepostWrapper">
-                <img src={singlepost} alt ="" className="singlePostImg">
-                </img>
+                {post.photo && (
+                    <img src={post.photo} alt ="" className="singlePostImg">
+                    </img>
+                )}
+                
                 <h1 className='singlePostTitle'>
-                    My first Blog
+                    {post.title}
                     <div className="singlePostEdit">
                     <FaRegEdit className="postIconEdit"/>
                     <MdOutlineDeleteSweep className="postIconEdit"/>
                     </div>
                 </h1>
                 <div className="singlePostInfo">
-                    <span className="singlePostAuthor">Author: <b>Pranoti</b></span>
-                    <span className="singlePostDate">1 hour ago</span>
+                    <span className="singlePostAuthor">Author: <b>{post.username}</b></span>
+                    <span className="singlePostDate">{post.createdAt}</span>
                 </div>
-                <p className='singlePostDesc'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos, impedit. Exercitationem minima ipsam vero incidunt. Nobis consectetur quisquam nesciunt repellendus accusantium, architecto molestias tempora saepe a, unde, omnis quam alias
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos, impedit. Exercitationem minima ipsam vero incidunt. Nobis consectetur quisquam nesciunt repellendus accusantium, architecto molestias tempora saepe a, unde, omnis quam alias..</p>
+                <p className='singlePostDesc'>{post.description}</p>
             </div>
             
 
