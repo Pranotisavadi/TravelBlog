@@ -3,6 +3,7 @@ import './post.css'
 // import Post1 from "../images/post.JPG";
 
 const Post = ({post}) => {
+    console.log({post})
     return ( 
         <div className="post">
             {post.photo && (
