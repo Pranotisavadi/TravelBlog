@@ -27,7 +27,7 @@ const NavBar = () => {
           </li>
           <li className="navListItem"><Link className="link" to="/">ABOUT</Link></li>
           <li className="navListItem"><Link className="link" to="/">CONTACT</Link></li>
-          <li className="navListItem"><Link className="link" to="/">WRITE</Link></li>
+          <li className="navListItem"><Link className="link" to="/write">WRITE</Link></li>
           <li className="navListItem">{user && "LOGOUT"}</li>
         </ul>
       </div>

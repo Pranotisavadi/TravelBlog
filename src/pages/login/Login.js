@@ -12,8 +12,8 @@ const Login = () => {
     const userRef = useRef();
     const passwordRef = useRef();
      const  dispatch  = useContext(Context);
-    //  const isFetching  = useContext(Context);
-     const  user  = useContext(Context);
+     const isFetching  = useContext(Context);
+    
     
 
     const handleSubmit = async (e) => {
@@ -25,13 +25,13 @@ const Login = () => {
                 username:userRef.current.value,
                 password:passwordRef.current.value,
             })
-           dispatch({type: "LOGIN_SUCCESS", payload:res.data });
+           dispatch({type: "LOGIN_SUCCESS", payload: res.data });
         }catch (err){
             dispatch({type: "LOGIN_FAILURE"});
         }
 
     };
-    console.log(user);
+  
 
     return (
         <div className="login">
@@ -41,7 +41,7 @@ const Login = () => {
                 <input type="text" placeholder="Enter your username.."  ref={userRef}></input>
                 <label>Password</label>
                 <input type="password" placeholder="Enter your password.." ref={passwordRef}></input>
-                <button type="submit" className="loginButton">Login</button>
+                <button type="submit" className="loginButton"> Login</button>
                </form>
             <button className="registerButton">
                 <Link className='link' to="/register">Register</Link>

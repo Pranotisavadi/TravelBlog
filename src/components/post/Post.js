@@ -3,11 +3,12 @@ import './post.css'
 // import Post1 from "../images/post.JPG";
 
 const Post = ({post}) => {
-    console.log({post})
+    const PF = "localhost:5000/images/"
+    // console.log({post})
     return ( 
         <div className="post">
             {post.photo && (
-                <img className="postImg" src={ post.photo } alt="Post"></img>
+                <img className="postImg" src={PF+post.photo } alt="Post"></img>
             )}
            <div className="postInfo">
                {/* <div className="postTypes" key={post.id}>{
@@ -26,6 +27,8 @@ const Post = ({post}) => {
                 {post.description}
             </p>
         </div>
+        
+        
 
      );
 }
